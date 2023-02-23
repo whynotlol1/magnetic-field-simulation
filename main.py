@@ -36,24 +36,24 @@ if __name__ == '__main__':
         screen.blit(text_surface, (0, 40))
         screen.blit(magnet1, (magnet1_data["coords"][0] - magnet_standart, magnet1_data["coords"][1] - magnet_standart))
         screen.blit(magnet2, (magnet2_data["coords"][0] - magnet_standart, magnet2_data["coords"][1] - magnet_standart))
-        param = integrate.quad(lambda x: magnet1_data["strength"] * standart, 0, magnet1_data["strength"])[0]
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) - param + 2), magnet1_data["coords"][1] - magnet_standart / 2), param, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) + param - 2), magnet1_data["coords"][1] - magnet_standart / 2), param, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) - (param / 1.5) + 2), magnet1_data["coords"][1] - magnet_standart / 2), param / 1.5, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) + (param / 1.5) - 2), magnet1_data["coords"][1] - magnet_standart / 2), param / 1.5, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) - (param / 2) + 2), magnet1_data["coords"][1] - magnet_standart / 2), param / 2, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) + (param / 2) - 2), magnet1_data["coords"][1] - magnet_standart / 2), param / 2, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) - (param / 3) + 2), magnet1_data["coords"][1] - magnet_standart / 2), param / 3, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet1_data["coords"][0] - magnet_standart / 2) + (param / 3) - 2), magnet1_data["coords"][1] - magnet_standart / 2), param / 3, 2)
-        param = integrate.quad(lambda x: magnet2_data["strength"] * standart, 0, magnet2_data["strength"])[0]
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) - param + 2), magnet2_data["coords"][1] - magnet_standart / 2), param, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) + param - 2), magnet2_data["coords"][1] - magnet_standart / 2), param, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) - (param / 1.5) + 2), magnet2_data["coords"][1] - magnet_standart / 2), param / 1.5, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param / 1.5) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param / 1.5, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) - (param / 2) + 2), magnet2_data["coords"][1] - magnet_standart / 2), param / 2, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param / 2) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param / 2, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) - (param / 3) + 2), magnet2_data["coords"][1] - magnet_standart / 2), param / 3, 2)
-        pygame.draw.circle(screen, (0, 0, 0), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param / 3) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param / 3, 2)
+        param1 = integrate.quad(lambda x: magnet1_data["strength"] * standart, 0, magnet1_data["strength"])[0]
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) - param1 + 2), magnet1_data["coords"][1] - magnet_standart / 2), param1, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) + param1 - 2), magnet1_data["coords"][1] - magnet_standart / 2), param1, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) - (param1 / 1.5) + 2), magnet1_data["coords"][1] - magnet_standart / 2), param1 / 1.5, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) + (param1 / 1.5) - 2), magnet1_data["coords"][1] - magnet_standart / 2), param1 / 1.5, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) - (param1 / 2) + 2), magnet1_data["coords"][1] - magnet_standart / 2), param1 / 2, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) + (param1 / 2) - 2), magnet1_data["coords"][1] - magnet_standart / 2), param1 / 2, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) - (param1 / 3) + 2), magnet1_data["coords"][1] - magnet_standart / 2), param1 / 3, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet1_data["coords"][0] - magnet_standart / 2) + (param1 / 3) - 2), magnet1_data["coords"][1] - magnet_standart / 2), param1 / 3, 2)
+        param2 = integrate.quad(lambda x: magnet2_data["strength"] * standart, 0, magnet2_data["strength"])[0]
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) - param2 + 2), magnet2_data["coords"][1] - magnet_standart / 2), param2, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) + param2 - 2), magnet2_data["coords"][1] - magnet_standart / 2), param2, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) - (param2 / 1.5) + 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 1.5, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param2 / 1.5) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 1.5, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) - (param2 / 2) + 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 2, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param2 / 2) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 2, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) - (param2 / 3) + 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 3, 2)
+        pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param2 / 3) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 3, 2)
 
         # controls
         keys = pygame.key.get_pressed()
@@ -82,17 +82,12 @@ if __name__ == '__main__':
             magnet1_data["strength"] = magnet1_data["strength"] - 0.01 if magnet1_data["strength"] > 0.35 else magnet1_data["strength"]
             time.sleep(0.1)
 
-        if keys[pygame.K_4]:
+        if keys[pygame.K_3]:
             magnet2_data["strength"] += 0.01
             time.sleep(0.1)
-        if keys[pygame.K_5]:
+        if keys[pygame.K_4]:
             magnet2_data["strength"] = magnet2_data["strength"] - 0.01 if magnet2_data["strength"] > 0.35 else magnet2_data["strength"]
             time.sleep(0.1)
-
-        if keys[pygame.K_3]:
-            magnet1_data["magnetic_lines_direction"] = "up-down" if magnet1_data["magnetic_lines_direction"] == "down-up" else "down-up"
-        if keys[pygame.K_6]:
-            magnet2_data["magnetic_lines_direction"] = "up-down" if magnet2_data["magnetic_lines_direction"] == "down-up" else "down-up"
 
         pygame.display.update()
 
