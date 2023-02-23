@@ -3,7 +3,7 @@ import pygame
 import scipy.integrate as integrate
 
 pygame.init()
-standart = height = width = 800
+height = width = 800
 screen = pygame.display.set_mode((height, width))
 pygame.display.set_caption("magnetic field simulation")
 pygame.font.init()
