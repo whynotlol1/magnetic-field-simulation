@@ -4,7 +4,7 @@ import pygame
 import scipy.integrate as integrate
 
 
-def calculate_l(x1, x2, y1, y2) -> list[float, float, float]:
+def calculate_l(x1, y1, x2, y2) -> list[float, float, float]:
     return [math.sqrt((x1-x2)**2+(y1-y2)**2), (x1-x2), (y1-y2)]
 
 
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         distance = calculate_l(magnet1_data["coords"][0], magnet1_data["coords"][1], magnet2_data["coords"][0], magnet2_data["coords"][1])
 
         if param1 + param2 >= distance[0]:
-            print("true"). # To-Do
+            print("true")
         else:
             pass
 
