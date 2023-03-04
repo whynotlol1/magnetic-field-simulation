@@ -5,7 +5,7 @@ import scipy.integrate as integrate
 
 
 def calculate_l(x1, y1, x2, y2) -> list[float, float, float]:
-    return [math.sqrt((x1-x2)**2+(y1-y2)**2), (x1-x2), (y1-y2)]
+    return [math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2), (x1 - x2), (y1 - y2)]
 
 
 pygame.init()
@@ -15,6 +15,7 @@ pygame.display.set_caption("magnetic field simulation")
 pygame.font.init()
 my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
+is_simulating = False
 magnet_standart = 25
 magnet_gravity_speed_standart = 0.4
 magnet1 = pygame.Surface((magnet_standart, magnet_standart))
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     try:
         running = True
         while running:
-    
+
             # drawing the magnets
             screen.fill((255, 255, 255))
             text_surface = my_font.render(f'1st magnet strength (induction): {round(magnet1_data["strength"], 2)}', False, (0, 0, 0))
@@ -64,36 +65,54 @@ if __name__ == '__main__':
             pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param2 / 2) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 2, 2)
             pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) - (param2 / 3) + 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 3, 2)
             pygame.draw.circle(screen, (255, 0, 255), (int((magnet2_data["coords"][0] - magnet_standart / 2) + (param2 / 3) - 2), magnet2_data["coords"][1] - magnet_standart / 2), param2 / 3, 2)
-    
-            distance = calculate_l(magnet1_data["coords"][0], magnet1_data["coords"][1], magnet2_data["coords"][0], magnet2_data["coords"][1])
-    
+
+            distance = calculate_l(magnet1_data["coords"][0], magnet1_data["coords"][1], magnet2_data["coords"][0],
+                                   magnet2_data["coords"][1])
+
             # gravitation 'physics'
-            if param1 + param2 > distance[0]:
-                if distance[1] == distance[2] == 0:
-                    pass
-                else:
-                    if distance[1] == 0:
-                        if distance[2] > 0:
-                            pass
-                        elif distance[2] < 0:
-                            pass
-                    elif distance[2] == 0:
-                        if distance[1] > 0:
-                            pass
-                        elif distance[1] < 0:
-                            pass
+            if is_simulating:
+                if param1 + param2 > distance[0]:
+                    if distance[1] == distance[2] == 0:
+                        pass
                     else:
-                        if distance[1] > 0:
+                        if distance[1] == 0:
                             if distance[2] > 0:
-                                pass
+                                magnet2_data["coords"][1] += magnet_gravity_speed_standart
+                                magnet1_data["coords"][1] -= magnet_gravity_speed_standart
                             elif distance[2] < 0:
-                                pass
-                        elif distance[1] < 0:
-                            if distance[2] > 0:
-                                pass
-                            elif distance[2] < 0:
-                                pass
-    
+                                magnet2_data["coords"][1] -= magnet_gravity_speed_standart
+                                magnet1_data["coords"][1] += magnet_gravity_speed_standart
+                        elif distance[2] == 0:
+                            if distance[1] > 0:
+                                magnet2_data["coords"][0] += magnet_gravity_speed_standart
+                                magnet1_data["coords"][0] -= magnet_gravity_speed_standart
+                            elif distance[1] < 0:
+                                magnet2_data["coords"][0] -= magnet_gravity_speed_standart
+                                magnet1_data["coords"][0] += magnet_gravity_speed_standart
+                        else:
+                            if distance[1] > 0:
+                                if distance[2] > 0:
+                                    magnet2_data["coords"][0] += magnet_gravity_speed_standart
+                                    magnet1_data["coords"][0] -= magnet_gravity_speed_standart
+                                    magnet2_data["coords"][1] += magnet_gravity_speed_standart
+                                    magnet1_data["coords"][1] -= magnet_gravity_speed_standart
+                                elif distance[2] < 0:
+                                    magnet2_data["coords"][0] += magnet_gravity_speed_standart
+                                    magnet1_data["coords"][0] -= magnet_gravity_speed_standart
+                                    magnet2_data["coords"][1] -= magnet_gravity_speed_standart
+                                    magnet1_data["coords"][1] += magnet_gravity_speed_standart
+                            elif distance[1] < 0:
+                                if distance[2] > 0:
+                                    magnet2_data["coords"][0] -= magnet_gravity_speed_standart
+                                    magnet1_data["coords"][0] += magnet_gravity_speed_standart
+                                    magnet2_data["coords"][1] += magnet_gravity_speed_standart
+                                    magnet1_data["coords"][1] -= magnet_gravity_speed_standart
+                                elif distance[2] < 0:
+                                    magnet2_data["coords"][0] -= magnet_gravity_speed_standart
+                                    magnet1_data["coords"][0] += magnet_gravity_speed_standart
+                                    magnet2_data["coords"][1] -= magnet_gravity_speed_standart
+                                    magnet1_data["coords"][1] += magnet_gravity_speed_standart
+
             # controls
             keys = pygame.key.get_pressed()
             if keys[pygame.K_UP] and magnet1_data["coords"][1] > 0 + magnet_standart:
@@ -104,7 +123,7 @@ if __name__ == '__main__':
                 magnet1_data["coords"][0] += magnet1_data["moving_speed"]
             if keys[pygame.K_LEFT] and magnet1_data["coords"][0] > 0 + magnet_standart:
                 magnet1_data["coords"][0] -= magnet1_data["moving_speed"]
-    
+
             if keys[pygame.K_w] and magnet2_data["coords"][1] > 0 + magnet_standart:
                 magnet2_data["coords"][1] -= magnet2_data["moving_speed"]
             if keys[pygame.K_s] and magnet2_data["coords"][1] < height:
@@ -113,25 +132,29 @@ if __name__ == '__main__':
                 magnet2_data["coords"][0] += magnet2_data["moving_speed"]
             if keys[pygame.K_a] and magnet2_data["coords"][0] > 0 + magnet_standart:
                 magnet2_data["coords"][0] -= magnet2_data["moving_speed"]
-    
+
             if keys[pygame.K_1]:
                 magnet1_data["strength"] += 0.01
                 time.sleep(0.1)
             if keys[pygame.K_2]:
                 magnet1_data["strength"] = magnet1_data["strength"] - 0.01 if magnet1_data["strength"] > 0.35 else magnet1_data["strength"]
                 time.sleep(0.1)
-    
+
             if keys[pygame.K_3]:
                 magnet2_data["strength"] += 0.01
                 time.sleep(0.1)
             if keys[pygame.K_4]:
                 magnet2_data["strength"] = magnet2_data["strength"] - 0.01 if magnet2_data["strength"] > 0.35 else magnet2_data["strength"]
                 time.sleep(0.1)
-    
+
+            if keys[pygame.K_q]:
+                is_simulating = True if not is_simulating else False
+                time.sleep(0.1)
+
             pygame.display.update()
-    
+
             for event in pygame.event.get():
-    
+
                 if event.type == pygame.QUIT:
                     running = False
                     pygame.quit()
