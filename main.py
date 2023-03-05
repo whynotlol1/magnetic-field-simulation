@@ -159,6 +159,7 @@ if __name__ == '__main__':
                     running = False
                     pygame.quit()
                     exit(0)
+                    
     except Exception as e:
         print(f"unknown error occurred: {e}")
         exit(0)
