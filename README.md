@@ -1,15 +1,15 @@
 oversimplified simulation of magnetic field lines for 2 magnets (in the future i'll work a bit more on that project)
 
 **controls**:
-- moving 1st magnet: [W,A,S,D]
-- moving 2nd magnet: [up, left, down, right] (arrows)
-- increasing 1st magnet strength: [1]
-- decreasing 1st magnet strength: [2]
-- increasing 2nd magnet strength: [3]
-- decreasing 2nd magnet strength: [4]
-- starting the gravitation simulation: [Q]
+- moving magnet: [W,A,S,D]
+- increasing magnet strength: [1]
+- decreasing magnet strength: [2]
+- change maget fields: [Q]
 
 **changelog**:
 
-05.02.23:
+05.03.23:
 - added the simpliest gravitation simulation (activate with [Q], disabled by default)
+
+08.03.23:
+- removed the 2nd magnet, now working on only 1 magnet
