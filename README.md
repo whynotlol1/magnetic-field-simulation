@@ -13,3 +13,6 @@ oversimplified simulation of magnetic field lines for 2 magnets (in the future i
 
 08.03.23:
 - removed the 2nd magnet, now working on only 1 magnet
+
+12.03.23:
+- reworked the magnetic field
