@@ -12,7 +12,6 @@ pygame.font.init()
 my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
 magnet_standart = 25
-magnet = pygame.Surface((magnet_standart, magnet_standart))
 magnet_data = {
     "coords": [375, 375],
     "moving_speed": 0.3,
@@ -25,25 +24,27 @@ if __name__ == '__main__':
         running = True
         while running:
 
-            # drawing the magnets
+            # drawing the magnet and the magnetic field
             screen.fill((255, 255, 255))
             text_surface = my_font.render(f'magnet strength (induction): {round(magnet_data["strength"], 2)}', False, (0, 0, 0))
             screen.blit(text_surface, (0, 0))
-            screen.blit(magnet, (magnet_data["coords"][0] - magnet_standart, magnet_data["coords"][1] - magnet_standart))
+            pygame.draw.rect(screen, (0, 0, 0), (magnet_data["coords"][0] - magnet_standart / 2, magnet_data["coords"][1] - magnet_standart / 2, magnet_standart, magnet_standart))
             param = integrate.quad(lambda x: magnet_data["strength"] * standart, 0, magnet_data["strength"])[0]
-            pygame.draw.arc(screen, (255, 0, 0), ((magnet_data["coords"][0] - param / 2), (magnet_data["coords"][1] - param / 2), (magnet_data["coords"][0]), (magnet_data["coords"][1])), 0, math.pi)
-            pygame.draw.arc(screen, (0, 0, 255), ((magnet_data["coords"][0] - param / 2), (magnet_data["coords"][1] + param / 2), (magnet_data["coords"][0]), (magnet_data["coords"][1])), math.pi, 2 * math.pi)
+            for i in range(0, width, 5):
+                for j in range(0, height, 5):
+                    if math.sqrt((i - magnet_data["coords"][0]) ** 2 + (j - magnet_data["coords"][1]) ** 2) < param:
+                        pygame.draw.circle(screen, (0, 255, 0), (i, j), 1)
 
             # controls
             keys = pygame.key.get_pressed()
 
-            if keys[pygame.K_w] and magnet_data["coords"][1] > 0 + magnet_standart:
+            if keys[pygame.K_w] and magnet_data["coords"][1] > 0:
                 magnet_data["coords"][1] -= magnet_data["moving_speed"]
-            if keys[pygame.K_s] and magnet_data["coords"][1] < height:
+            if keys[pygame.K_s] and magnet_data["coords"][1] < height - magnet_standart:
                 magnet_data["coords"][1] += magnet_data["moving_speed"]
-            if keys[pygame.K_d] and magnet_data["coords"][0] < width:
+            if keys[pygame.K_d] and magnet_data["coords"][0] < width - magnet_standart:
                 magnet_data["coords"][0] += magnet_data["moving_speed"]
-            if keys[pygame.K_a] and magnet_data["coords"][0] > 0 + magnet_standart:
+            if keys[pygame.K_a] and magnet_data["coords"][0] > 0:
                 magnet_data["coords"][0] -= magnet_data["moving_speed"]
 
             if keys[pygame.K_1]:
@@ -51,10 +52,6 @@ if __name__ == '__main__':
                 time.sleep(0.1)
             if keys[pygame.K_2]:
                 magnet_data["strength"] = magnet_data["strength"] - 0.01 if magnet_data["strength"] > 0.35 else magnet_data["strength"]
-                time.sleep(0.1)
-
-            if keys[pygame.K_q]:
-                magnet_data["magnetic_lines_direction"] = "up-down" if magnet_data["magnetic_lines_direction"] == "down-up" else "down-up"
                 time.sleep(0.1)
 
             pygame.display.update()
