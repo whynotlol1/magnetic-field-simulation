@@ -4,7 +4,6 @@ oversimplified simulation of magnetic field lines for 2 magnets (in the future i
 - moving magnet: [W,A,S,D]
 - increasing magnet strength: [1]
 - decreasing magnet strength: [2]
-- change maget fields: [Q]
 
 **changelog**:
 
